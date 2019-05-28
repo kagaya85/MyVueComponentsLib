@@ -37,7 +37,7 @@ var messageBox = {
   template: `
     <li class="message-item"> 
       <div class="time-bar" v-if="showTime">{{getLocalTime(time)}}</div> 
-      <div :class="msgFrom"> 
+      <div :class="[msgFrom, 'align']"> 
         <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="!isMe" class="avator"/> 
         <div class="bubble">{{text}}</div> 
         <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="isMe" class="avator"/> 

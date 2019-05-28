@@ -47,10 +47,26 @@ ul, li {
   margin: 10px 60px 10px 60px;
 }
 
+.align {
+  display: flex;
+  align-items: flex-start;
+}
+
 .avator {
+  display: inline-block;
   border-radius:50%;
   height: 50px;
   width: 50px;
+}
+
+.is-me {
+  /* text-align: right; */
+  justify-content: flex-end;
+}
+
+.not-me {
+  /* text-align: left; */
+  justify-content: flex-start;
 }
 
 .is-me .avator {
@@ -64,6 +80,7 @@ ul, li {
 .time-bar {
   text-align: center;
   color: #8c8c8c;
+  margin: 10px 0px;
 }
 /*********** send-box ************/
 .input-box {
@@ -88,18 +105,16 @@ ul, li {
   line-height: 1.2; 
   background: #f2f2f2;
   border-radius: 15px;
+  max-width: 60%;
+  word-break: break-all;
 }
 
 .is-me .bubble {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .not-me .bubble {
-  margin-left: 10px;
-}
-
-.not-me {
-  text-align: left;
+  margin-left: 20px;
 }
 
 .not-me .bubble:before {
@@ -122,10 +137,6 @@ ul, li {
   height: 20px;
   background-color: #fff;
   border-bottom-left-radius: 100px 40px;
-}
-
-.is-me {
-  text-align: right;
 }
 
 .is-me .bubble:before {
