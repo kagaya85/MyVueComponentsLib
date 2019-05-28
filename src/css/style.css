@@ -1,0 +1,151 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+ul, li {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+/******************************
+ * main
+ ******************************/
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+  height: 80%;
+  border: solid black 1px;
+}
+
+/*********** message window ************/
+.message-win {
+  height: 80%;
+  width: 100%;
+  overflow: scroll;
+}
+
+/* 隐藏滚动条（chrome方法） */
+.message-win::-webkit-scrollbar {
+  display: none;
+}
+
+.message-item {
+  position: relative;
+  margin: 10px 60px 10px 60px;
+}
+
+.avator {
+  border-radius:50%;
+  height: 50px;
+  width: 50px;
+}
+
+.is-me .avator {
+  margin-right: -50px;
+}
+
+.not-me .avator {
+  margin-left: -50px;
+}
+
+.time-bar {
+  text-align: center;
+  color: #8c8c8c;
+}
+/*********** send-box ************/
+.input-box {
+  height: 100px;
+  width: 90%;
+}
+
+/******************************
+ * bubble
+ ******************************/
+.username {
+  /* display: inline; */
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bubble{
+  display: inline-block;
+  position: relative;
+  padding: 15px;
+  line-height: 1.2; 
+  background: #f2f2f2;
+  border-radius: 15px;
+}
+
+.is-me .bubble {
+  margin-right: 10px;
+}
+
+.not-me .bubble {
+  margin-left: 10px;
+}
+
+.not-me {
+  text-align: left;
+}
+
+.not-me .bubble:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -15px;
+  height: 30px;
+  width: 15px;
+  background-color: #f2f2f2;  
+  border-bottom-left-radius: 40px 60px;
+}
+
+.not-me .bubble:after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -15px;
+  width: 15px;
+  height: 20px;
+  background-color: #fff;
+  border-bottom-left-radius: 100px 40px;
+}
+
+.is-me {
+  text-align: right;
+}
+
+.is-me .bubble:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -15px;
+  height: 30px;
+  width: 15px;
+  background-color: #f2f2f2;  
+  border-bottom-right-radius: 40px 60px;
+}
+
+.is-me .bubble:after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -15px;
+  width: 15px;
+  height: 20px;
+  background-color: #fff;
+  border-bottom-right-radius: 100px 40px;
+}
