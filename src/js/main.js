@@ -43,7 +43,10 @@ var messageBox = {
       <div class="time-bar" v-if="showTime">{{getLocalTime(time)}}</div> 
       <div :class="[msgFrom, 'align']"> 
         <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="!isMe && showAvatar" class="avator"/> 
-        <div class="bubble">{{text}}</div> 
+        <div class="bubble-box">
+          <div class="bubble">{{text}}</div> 
+          <span class="username" v-if="showAvatar">{{name}}</span>
+        </div>
         <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="isMe && showAvatar" class="avator"/> 
       </div> 
     </li> 
@@ -62,8 +65,8 @@ var app = new Vue({
     'message-box': messageBox
   },
   mounted() {
-    // let url = 'https://koala-ae5de.firebaseio.com/test/chat.json';
-    let url = 'data/chat.json';
+    let url = 'https://koala-ae5de.firebaseio.com/test/chat.json';
+    // let url = 'data/chat.json';
     
     axios.get(url)
       .then(response => {

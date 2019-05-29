@@ -30,8 +30,13 @@ ul, li {
   justify-content: flex-start;
   align-items: center;
   width: 60%;
-  height: 80%;
+  min-width: 390px;
+  max-width: 800px;
+  height: 85%;
+  max-height: 850px;
+  min-height: 600px;
   border: solid black 1px;
+  border-radius: 5px;
 }
 
 /*********** message window ************/
@@ -93,10 +98,17 @@ ul, li {
   color: #8c8c8c;
   margin: 10px 0px;
 }
-/*********** send-box ************/
+/*********** input ************/
 .input-box {
   height: 100px;
   width: 90%;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  border-radius: 5px;
+}
+
+.btn-box {
+  width: 90%;
+  text-align: right;
 }
 
 .btn {
@@ -104,20 +116,43 @@ ul, li {
   margin: 10px;
   padding: 10px 20px;
   border: solid black 1px;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .btn:hover {
   color: white;
-  background-color: black;
+  background-color: #8c8c8c;
+  border-color: #8c8c8c;
 }
 
 /******************************
  * bubble
  ******************************/
-.username {
+.bubble-box {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+}
+
+.is-me .bubble-box {
+  align-items: flex-end;
+}
+
+.not-me .bubble-box {
+  align-items: flex-start;
+}
+
+.is-me .username {
+  margin-right: 25px;
+}
+
+.not-me .username {
+  margin-left: 25px;
+}
+
+ .username {
   /* display: inline; */
-  margin-left: 5px;
+  /* margin-left: 5px; */
   font-size: 12px;
   font-weight: bold;
 }
@@ -128,10 +163,8 @@ ul, li {
   padding: 15px;
   line-height: 1.2; 
   border-radius: 15px;
-  max-width: 60%;
   word-break: break-all;
 }
-
 
 .is-me .bubble {
   margin-right: 20px;

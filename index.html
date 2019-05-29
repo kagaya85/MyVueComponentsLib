@@ -16,8 +16,10 @@
         <message-box v-for="(item, index) in chatData" :key="index" :avatar="item.avatar" :name="item.name"
           :text="item.text" :time="item.time" :show-time="item.showTime" :show-avatar="item.showAvatar">{{item.text}}</message-box>
       </div>
-      <textarea rows="5" class="input-box" v-model="sendText"></textarea>
-      <div class="send-btn btn" @click="onSendClick">Send</div>
+      <textarea rows="5" class="input-box" v-model="sendText" placeholder="Please input something..."></textarea>
+      <div class="btn-box">
+        <div class="send-btn btn" @click="onSendClick">Send</div>
+      </div>
     </div>
   </div>
   <script src="src/js/vue.min.js"></script>
