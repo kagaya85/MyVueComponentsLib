@@ -8,6 +8,7 @@ ul, li {
   padding-left: 0px;
 }
 
+
 /******************************
  * main
  ******************************/
@@ -18,6 +19,9 @@ ul, li {
   align-items: center;
   width: 100vw;
   height: 100vh;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -38,13 +42,20 @@ ul, li {
 }
 
 /* 隐藏滚动条（chrome方法） */
-.message-win::-webkit-scrollbar {
-  display: none;
-}
+.message-win::-webkit-scrollbar { display: none; }
+/* 兼容IE10+ */
+.message-win { -ms-overflow-style: none; }        
+/* firefox代码无效 */
+.message-win { overflow: -moz-scrollbars-none; }
+             
 
 .message-item {
   position: relative;
-  margin: 10px 60px 10px 60px;
+  margin: 0px 60px 3px 60px;
+}
+
+.ex-margin {
+  margin-bottom: 20px;
 }
 
 .align {
@@ -88,6 +99,19 @@ ul, li {
   width: 90%;
 }
 
+.btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border: solid black 1px;
+  border-radius: 20px;
+}
+
+.btn:hover {
+  color: white;
+  background-color: black;
+}
+
 /******************************
  * bubble
  ******************************/
@@ -103,18 +127,20 @@ ul, li {
   position: relative;
   padding: 15px;
   line-height: 1.2; 
-  background: #f2f2f2;
   border-radius: 15px;
   max-width: 60%;
   word-break: break-all;
 }
 
+
 .is-me .bubble {
   margin-right: 20px;
+  background: #00ff33;
 }
 
 .not-me .bubble {
   margin-left: 20px;
+  background: #f2f2f2;
 }
 
 .not-me .bubble:before {
@@ -146,7 +172,7 @@ ul, li {
   right: -15px;
   height: 30px;
   width: 15px;
-  background-color: #f2f2f2;  
+  background-color: #00ff33;  
   border-bottom-right-radius: 40px 60px;
 }
 

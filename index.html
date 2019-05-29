@@ -4,22 +4,24 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <link rel="stylesheet" href="src/css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
   <title>ChatWindow</title>
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" @keyup.enter="onSendClick">
     <div class="container">
-      <div class="message-win">
+      <div id="scroll-win" class="message-win">
         <message-box v-for="(item, index) in chatData" :key="index" :avatar="item.avatar" :name="item.name"
-          :text="item.text" :time="item.time" :show-time="item.showTime">{{item.text}}</message-box>
+          :text="item.text" :time="item.time" :show-time="item.showTime" :show-avatar="item.showAvatar">{{item.text}}</message-box>
       </div>
-      <textarea rows="5" class="input-box"></textarea>
+      <textarea rows="5" class="input-box" v-model="sendText"></textarea>
+      <div class="send-btn btn" @click="onSendClick">Send</div>
     </div>
   </div>
-  <!-- <script src="src/js/vue.min.js"></script> -->
+  <script src="src/js/vue.min.js"></script>
+  <script src="src/js/axios.min.js"></script>
   <script type="text/javascript" src="src/js/main.js"></script>
 </body>
 

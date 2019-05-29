@@ -15,6 +15,10 @@ var messageBox = {
     showTime: {
       type: Boolean,
       default: false
+    },
+    showAvatar: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -35,12 +39,12 @@ var messageBox = {
    }
   },
   template: `
-    <li class="message-item"> 
+    <li :class="['message-item', showAvatar ? 'ex-margin' : '']"> 
       <div class="time-bar" v-if="showTime">{{getLocalTime(time)}}</div> 
       <div :class="[msgFrom, 'align']"> 
-        <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="!isMe" class="avator"/> 
+        <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="!isMe && showAvatar" class="avator"/> 
         <div class="bubble">{{text}}</div> 
-        <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="isMe" class="avator"/> 
+        <img :src="avatar" alt="" @error="flag && errHandle($event)" v-if="isMe && showAvatar" class="avator"/> 
       </div> 
     </li> 
     `
@@ -49,19 +53,28 @@ var messageBox = {
 var app = new Vue({
   el: '#app',
   data: {
-    chatData: null,
-    lastTime: 0
+    chatData: [],
+    lastTime: 0,
+    sendText: '',
+    myAvatarImgUrl: ''
   },
   components: {
     'message-box': messageBox
   },
   mounted() {
-    axios.get('https://koala-ae5de.firebaseio.com/test/chat.json')
+    // let url = 'https://koala-ae5de.firebaseio.com/test/chat.json';
+    let url = 'data/chat.json';
+    
+    axios.get(url)
       .then(response => {
-        this.chatData = response.data;
-        for(let key in this.chatData) {
+        for(let key in response.data) {
           // 为所有message添加是否显示时间的标志
-          this.chatData[key].showTime = this.showTime(this.chatData[key].time);
+          response.data[key].showTime = this.showTime(response.data[key].time);
+          if(!response.data[key].showTime && this.chatData[this.chatData.length - 1].name == response.data[key].name){
+            this.chatData[this.chatData.length - 1].showAvatar = false;
+          }
+          response.data[key].showAvatar = true;
+          this.chatData.push(response.data[key]);
         }
       })
       .catch(err => console.error(err));
@@ -76,6 +89,43 @@ var app = new Vue({
         return true;
       }
       return false;
-    }
+    },
+    onSendClick: function() {
+      if(this.sendText == '') {
+        return;
+      }
+
+      let ctime = Math.floor((new Date().getTime())/1000);
+      let showTime;
+
+      if((ctime - this.lastTime) > 300) {
+        showTime = true;
+        this.lastTime = ctime;
+      }
+      else {
+        showTime = false;
+      }
+
+      if(!showTime && this.chatData[this.chatData.length - 1].name == "Me") {
+        this.chatData[this.chatData.length - 1].showAvatar = false;
+      }
+
+      this.chatData.push({
+        "avatar": this.myAvatarImgUrl,
+        "name": "Me",
+        "text": this.sendText,
+        "time": ctime,
+        "showTime": showTime,
+        "showAvatar" : true
+      });
+
+      this.sendText = '';
+    },
   },
+  updated: function(){
+    this.$nextTick(function(){
+    var div = document.getElementById('scroll-win');
+      div.scrollTop = div.scrollHeight;
+    })
+  }
 })
